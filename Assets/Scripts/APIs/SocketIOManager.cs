@@ -16,13 +16,15 @@ public class SocketIOManager : MonoBehaviour
     [SerializeField]
     private SlotBehaviour slotManager;
 
+    [SerializeField]
+    private UIManager uiManager;
+
     internal GameData initialData = null;
     internal UIData initUIData = null;
     internal GameData resultData = null;
     internal PlayerData playerdata = null;
     [SerializeField]
     internal List<string> bonusdata = null;
-    //WebSocket currentSocket = null;
     internal bool isResultdone = false;
 
     private SocketManager manager;
@@ -30,17 +32,22 @@ public class SocketIOManager : MonoBehaviour
     [SerializeField]
     internal JSHandler _jsManager;
 
-    [SerializeField]
-    private string SocketURI;
+    protected string SocketURI = "https://dev.casinoparadize.com";
 
     [SerializeField]
     private string TestToken;
 
     protected string gameID = "SL-GCT";
 
+    internal bool isLoaded = false;
+
+    private void Awake()
+    {
+        isLoaded = false;
+    }
+
     private void Start()
     {
-        //OpenWebsocket();
         OpenSocket();
     }
 
@@ -154,6 +161,7 @@ public class SocketIOManager : MonoBehaviour
     private void OnDisconnected(string response)
     {
         Debug.Log("Disconnected from the server");
+        uiManager.DisconnectionPopup(false);
     }
 
     private void OnError(string response)
@@ -251,7 +259,7 @@ public class SocketIOManager : MonoBehaviour
 
         slotManager.SetInitialUI();
 
-        Application.ExternalCall("window.parent.postMessage", "OnEnter", "*");
+        isLoaded = true;
     }
 
     internal void AccumulateResult(double currBet)
@@ -353,6 +361,8 @@ public class SocketIOManager : MonoBehaviour
 public class BetData
 {
     public double currentBet;
+    public double currentLines;
+    public double spins;
     //public double TotalLines;
 }
 
@@ -389,7 +399,7 @@ public class GameData
 {
     public List<List<string>> Reel { get; set; }
     public List<List<int>> Lines { get; set; }
-    public List<int> Bets { get; set; }
+    public List<double> Bets { get; set; }
     public bool canSwitchLines { get; set; }
     public List<int> LinesCount { get; set; }
     public List<int> autoSpin { get; set; }
@@ -464,6 +474,7 @@ public class PlayerData
 {
     public double Balance { get; set; }
     public double haveWon { get; set; }
+    public double currentWining { get; set; }
 }
 
 
