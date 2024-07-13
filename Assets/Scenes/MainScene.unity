@@ -2623,7 +2623,7 @@ GameObject:
   - component: {fileID: 244040444}
   - component: {fileID: 244040443}
   m_Layer: 5
-  m_Name: Title_Text (1)
+  m_Name: Jackpot_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3950,6 +3950,9 @@ MonoBehaviour:
   - {fileID: 1351208220}
   - {fileID: 1771310477}
   - {fileID: 244490626}
+  FreeSpin_Text: {fileID: 1402277324}
+  Scatter_Text: {fileID: 484893724}
+  Jackpot_Text: {fileID: 244040443}
   SettingsPopup_Object: {fileID: 103253977}
   SettingsExit_Button: {fileID: 1398599432}
   Sound_Button: {fileID: 1690227056}
@@ -4281,7 +4284,7 @@ GameObject:
   - component: {fileID: 484893725}
   - component: {fileID: 484893724}
   m_Layer: 5
-  m_Name: Title_Text (3)
+  m_Name: Scatter_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4726,7 +4729,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  TestToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGZiMmQwZmE0ZWVmYmQyZmQ0NWY3OCIsInVzZXJuYW1lIjoiZ2F1cmF2Iiwicm9sZSI6InBsYXllciIsImlhdCI6MTcyMDY5Njg4MSwiZXhwIjoxNzIwNzgzMjgxfQ.ySD8axrJzpFXN8l7lHd0X3eo1FK39-E0AGerpSY6tzQ
+  TestToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGZiMmQwZmE0ZWVmYmQyZmQ0NWY3OCIsInVzZXJuYW1lIjoiZ2F1cmF2Iiwicm9sZSI6InBsYXllciIsImlhdCI6MTcyMDg0NzE3OSwiZXhwIjoxNzIwOTMzNTc5fQ.omnYYnozWFzXDcEGRFyYyCVguEghBL7CInatu624FbI
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13513,7 +13516,7 @@ GameObject:
   - component: {fileID: 1402277325}
   - component: {fileID: 1402277324}
   m_Layer: 5
-  m_Name: Title_Text (5)
+  m_Name: FreeSpin_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17139,7 +17142,7 @@ GameObject:
   - component: {fileID: 1766817960}
   - component: {fileID: 1766817959}
   m_Layer: 5
-  m_Name: Title_Text (4)
+  m_Name: Bonus_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20056,7 +20059,7 @@ GameObject:
   - component: {fileID: 1972071138}
   - component: {fileID: 1972071137}
   m_Layer: 5
-  m_Name: Title_Text (2)
+  m_Name: Wild_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -742,8 +742,8 @@ public class SlotBehaviour : MonoBehaviour
         }
         else
         {
-
-            if (audioController) audioController.PlayWLAudio("lose");
+            if (audioController) audioController.StopWLAaudio();
+            //if (audioController) audioController.PlayWLAudio("lose");
         }
     }
 
