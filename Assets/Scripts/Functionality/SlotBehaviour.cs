@@ -599,28 +599,20 @@ public class SlotBehaviour : MonoBehaviour
 
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
 
-        currentBalance = SocketManager.playerdata.Balance;
-
         if (SocketManager.resultData.jackpot > 0)
         {
             uiManager.PopulateWin(4, SocketManager.resultData.jackpot);
+            yield return new WaitUntil(() => !CheckPopups);
+            CheckPopups = true;
         }
-        else if (SocketManager.resultData.WinAmout >= bet * 5 && SocketManager.resultData.WinAmout < bet * 10)
+
+        if (SocketManager.resultData.isBonus)
         {
-            uiManager.PopulateWin(1, SocketManager.resultData.WinAmout);
-        }
-        else if (SocketManager.resultData.WinAmout >= bet * 10 && SocketManager.resultData.WinAmout < bet * 15)
-        {
-            uiManager.PopulateWin(2, SocketManager.resultData.WinAmout);
-        }
-        else if (SocketManager.resultData.WinAmout >= bet * 15)
-        {
-            uiManager.PopulateWin(3, SocketManager.resultData.WinAmout);
+            CheckBonusGame();
         }
         else
         {
-            yield return new WaitForSeconds(0.2f);
-            CheckBonusGame();
+            CheckWinPopups();
         }
 
         yield return new WaitUntil(() => !CheckPopups);
@@ -640,6 +632,27 @@ public class SlotBehaviour : MonoBehaviour
         }
 
     }
+
+    internal void CheckWinPopups()
+    {
+        if (SocketManager.resultData.WinAmout >= currentTotalBet * 5 && SocketManager.resultData.WinAmout < currentTotalBet * 10)
+        {
+            uiManager.PopulateWin(1, SocketManager.resultData.WinAmout);
+        }
+        else if (SocketManager.resultData.WinAmout >= currentTotalBet * 10 && SocketManager.resultData.WinAmout < currentTotalBet * 15)
+        {
+            uiManager.PopulateWin(2, SocketManager.resultData.WinAmout);
+        }
+        else if (SocketManager.resultData.WinAmout >= currentTotalBet * 15)
+        {
+            uiManager.PopulateWin(3, SocketManager.resultData.WinAmout);
+        }
+        else
+        {
+            CheckPopups = false;
+        }
+    }
+
     internal void CallCloseSocket()
     {
         SocketManager.CloseSocket();
