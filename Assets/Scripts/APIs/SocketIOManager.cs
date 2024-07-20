@@ -35,6 +35,7 @@ public class SocketIOManager : MonoBehaviour
     internal JSHandler _jsManager;
 
     protected string SocketURI = "https://dev.casinoparadize.com";
+    //protected string SocketURI = "https://916smq0d-5000.inc1.devtunnels.ms/";
 
     [SerializeField]
     private string TestToken;
@@ -277,9 +278,11 @@ public class SocketIOManager : MonoBehaviour
         MessageData message = new MessageData();
         message.data = new BetData();
         message.data.currentBet = bet;
+        message.data.currentLines = 20;
+        message.data.spins = 1;
         message.id = namespaceName;
         // Serialize message data to JSON
-        string json = JsonUtility.ToJson(message);
+        string json = JsonUtility.ToJson(message);  
         Debug.Log(json);
         // Send the message
         if (this.manager.Socket != null && this.manager.Socket.IsOpen)
