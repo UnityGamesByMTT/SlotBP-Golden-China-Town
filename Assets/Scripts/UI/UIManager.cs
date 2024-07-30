@@ -141,6 +141,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject DisconnectPopup_Object;
 
+    [Header("AnotherDevice Popup")]
+    [SerializeField]
+    private Button CloseAD_Button;
+    [SerializeField]
+    private GameObject ADPopup_Object;
+
     [Header("LowBalance Popup")]
     [SerializeField]
     private Button LBExit_Button;
@@ -224,6 +230,9 @@ public class UIManager : MonoBehaviour
         if (CrossQuit_Button) CrossQuit_Button.onClick.RemoveAllListeners();
         if (CrossQuit_Button) CrossQuit_Button.onClick.AddListener(delegate { ClosePopup(QuitPopup_Object); });
 
+        if (CloseAD_Button) CloseAD_Button.onClick.RemoveAllListeners();
+        if (CloseAD_Button) CloseAD_Button.onClick.AddListener(CallOnExitFunction);
+
         if (YesQuit_Button) YesQuit_Button.onClick.RemoveAllListeners();
         if (YesQuit_Button) YesQuit_Button.onClick.AddListener(CallOnExitFunction);
 
@@ -252,6 +261,11 @@ public class UIManager : MonoBehaviour
     internal void LowBalPopup()
     {
         OpenPopup(LBPopup_Object);
+    }
+
+    internal void ADfunction()
+    {
+        OpenPopup(ADPopup_Object);
     }
 
     private void Awake()

@@ -352,6 +352,17 @@ public class SlotBehaviour : MonoBehaviour
         PopulateSlot(myvalues, number);
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            if (!IsSpinning)
+            {
+                if (audioController) audioController.StopWLAaudio();
+            }
+        }
+    }
+
     internal void SetInitialUI()
     {
         BetCounter = SocketManager.initialData.Bets.Count - 1;
@@ -628,7 +639,7 @@ public class SlotBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             IsSpinning = false;
         }
-        if (SocketManager.resultData.freeSpins > 0)
+        if (SocketManager.resultData.freeSpins > 0 && !IsFreeSpin)
         {
             uiManager.FreeSpinProcess((int)SocketManager.resultData.freeSpins);
         }
