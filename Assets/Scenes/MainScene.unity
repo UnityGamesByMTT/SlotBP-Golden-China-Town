@@ -3573,11 +3573,11 @@ MonoBehaviour:
   m_Content: {fileID: 1439031790}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 562158823}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2123290679}
@@ -16610,9 +16610,9 @@ RectTransform:
   - {fileID: 103253978}
   - {fileID: 200896911}
   - {fileID: 735960317}
-  - {fileID: 1772686673}
   - {fileID: 1145786314}
   - {fileID: 668262714}
+  - {fileID: 1772686673}
   m_Father: {fileID: 1485219722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
