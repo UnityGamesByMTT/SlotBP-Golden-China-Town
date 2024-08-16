@@ -54,11 +54,16 @@ public class SocketIOManager : MonoBehaviour
         OpenSocket();
     }
 
-    void ReceiveAuthToken(string authToken)
+    void ReceiveAuthToken(string jsonData)
     {
-        Debug.Log("Received authToken: " + authToken);
-        // Do something with the authToken
-        myAuth = authToken;
+        Debug.Log("Received data: " + jsonData);
+
+        // Parse the JSON data
+        var data = JsonUtility.FromJson<AuthTokenData>(jsonData);
+        myAuth = data.cookie;
+        SocketURI = data.socketURL;
+
+        // Proceed with connecting to the server using myAuth and socketURL
     }
 
     string myAuth = null;
@@ -72,35 +77,17 @@ public class SocketIOManager : MonoBehaviour
         Application.ExternalCall("window.parent.postMessage", "authToken", "*");
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        _jsManager.RetrieveAuthToken("token", authToken =>
-        {
-            if (!string.IsNullOrEmpty(authToken))
-            {
-                Debug.Log("Auth token is " + authToken);
-                Func<SocketManager, Socket, object> authFunction = (manager, socket) =>
-                {
-                    return new
-                    {
-                        token = authToken
-                    };
-                };
-                options.Auth = authFunction;
-                // Proceed with connecting to the server
-                SetupSocketManager(options);
-            }
-            else
-            {
-                Application.ExternalEval(@"
-                window.addEventListener('message', function(event) {
-                    if (event.data.type === 'authToken') {
-                        // Send the message to Unity
-                        SendMessage('SocketManager', 'ReceiveAuthToken', event.data.cookie);
-                    }});");
-
-                // Start coroutine to wait for the auth token
-                StartCoroutine(WaitForAuthToken(options));
-            }
-        });
+        Application.ExternalEval(@"
+            window.addEventListener('message', function(event) {
+                if (event.data.type === 'authToken') {
+                    var combinedData = JSON.stringify({
+                        cookie: event.data.cookie,
+                        socketURL: event.data.socketURL
+                    });
+                    // Send the combined data to Unity
+                    SendMessage('SocketManager', 'ReceiveAuthToken', combinedData);
+                }});");
+        StartCoroutine(WaitForAuthToken(options));
 #else
         Func<SocketManager, Socket, object> authFunction = (manager, socket) =>
         {
@@ -136,7 +123,6 @@ public class SocketIOManager : MonoBehaviour
         Debug.Log("Auth function configured with token: " + myAuth);
 
         // Proceed with connecting to the server
-        SetupSocketManager(options);
     }
 
     private void SetupSocketManager(SocketOptions options)
@@ -592,5 +578,11 @@ public class PlayerData
     public double currentWining { get; set; }
 }
 
+[Serializable]
+public class AuthTokenData
+{
+    public string cookie;
+    public string socketURL;
+}
 
 
