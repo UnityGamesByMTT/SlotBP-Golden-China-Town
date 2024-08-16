@@ -60,8 +60,8 @@ public class SocketIOManager : MonoBehaviour
 
         // Parse the JSON data
         var data = JsonUtility.FromJson<AuthTokenData>(jsonData);
-        myAuth = data.cookie;
         SocketURI = data.socketURL;
+        myAuth = data.cookie;
 
         // Proceed with connecting to the server using myAuth and socketURL
     }
@@ -122,6 +122,7 @@ public class SocketIOManager : MonoBehaviour
 
         Debug.Log("Auth function configured with token: " + myAuth);
 
+        SetupSocketManager(options);
         // Proceed with connecting to the server
     }
 
