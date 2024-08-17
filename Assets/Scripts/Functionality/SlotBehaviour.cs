@@ -132,6 +132,12 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField]
     private SocketIOManager SocketManager;
 
+    [Header("Free Spins Board")]
+    [SerializeField]
+    private GameObject FSBoard_Object;
+    [SerializeField]
+    private TMP_Text FSnum_text;
+
     private Coroutine AutoSpinRoutine = null;
     private Coroutine FreeSpinRoutine = null;
     private Coroutine tweenroutine;
@@ -170,6 +176,7 @@ public class SlotBehaviour : MonoBehaviour
         if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.AddListener(StopAutoSpin);
 
         tweenHeight = (15 * IconSizeFactor) - 280;
+        //CheckBetButtons();
     }
 
     private void AutoSpin()
@@ -195,7 +202,8 @@ public class SlotBehaviour : MonoBehaviour
     {
         if (!IsFreeSpin)
         {
-
+            if (FSnum_text) FSnum_text.text = spins.ToString();
+            if (FSBoard_Object) FSBoard_Object.SetActive(true);
             IsFreeSpin = true;
             ToggleButtonGrp(false);
 
@@ -254,7 +262,9 @@ public class SlotBehaviour : MonoBehaviour
             yield return tweenroutine;
             yield return new WaitForSeconds(2);
             i++;
+            if (FSnum_text) FSnum_text.text = (spinchances - i).ToString();
         }
+        if (FSBoard_Object) FSBoard_Object.SetActive(false);
         ToggleButtonGrp(true);
         IsFreeSpin = false;
     }
@@ -324,6 +334,7 @@ public class SlotBehaviour : MonoBehaviour
             if (BetCounter < SocketManager.initialData.Bets.Count - 1)
             {
                 BetCounter++;
+                //CheckBetButtons();
             }
         }
         else
@@ -331,6 +342,7 @@ public class SlotBehaviour : MonoBehaviour
             if (BetCounter > 0)
             {
                 BetCounter--;
+                //CheckBetButtons();
             }
         }
 
@@ -342,13 +354,13 @@ public class SlotBehaviour : MonoBehaviour
 
 
     //just for testing purposes delete on production
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && SlotStart_Button.interactable)
-        {
-            StartSlots();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space) && SlotStart_Button.interactable)
+    //    {
+    //        StartSlots();
+    //    }
+    //}
 
     //populate the slots with the values recieved from backend
     //internal void PopulateInitalSlots(int number, List<int> myvalues)
@@ -651,9 +663,18 @@ public class SlotBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             IsSpinning = false;
         }
-        if (SocketManager.resultData.freeSpins > 0 && !IsFreeSpin)
+        if (SocketManager.resultData.freeSpins.isNewAdded)
         {
-            uiManager.FreeSpinProcess((int)SocketManager.resultData.freeSpins);
+            if (IsFreeSpin)
+            {
+                IsFreeSpin = false;
+                if (FreeSpinRoutine != null)
+                {
+                    StopCoroutine(FreeSpinRoutine);
+                    FreeSpinRoutine = null;
+                }
+            }
+            uiManager.FreeSpinProcess((int)SocketManager.resultData.freeSpins.count);
             if (IsAutoSpin)
             {
                 StopAutoSpin();
@@ -713,7 +734,7 @@ public class SlotBehaviour : MonoBehaviour
             CheckPopups = false;
         }
 
-        if (SocketManager.resultData.freeSpins > 0)
+        if (SocketManager.resultData.freeSpins.count > 0)
         {
             if (IsAutoSpin)
             {
@@ -728,9 +749,52 @@ public class SlotBehaviour : MonoBehaviour
         if (SlotStart_Button) SlotStart_Button.interactable = toggle;
         if (MaxBet_Button) MaxBet_Button.interactable = toggle;
         if (AutoSpin_Button) AutoSpin_Button.interactable = toggle;
-        if (LineBetMinus_Button) LineBetMinus_Button.interactable = toggle;
-        if (LineBetPlus_Button) LineBetPlus_Button.interactable = toggle;
 
+        //if (toggle)
+        //{
+        //    CheckBetButtons();
+        //}
+        //else
+        //{
+            if (LineBetMinus_Button) LineBetMinus_Button.interactable = toggle;
+            if (LineBetPlus_Button) LineBetPlus_Button.interactable = toggle;
+        //}
+
+    }
+
+    private void TurnBetButtons(int m_config_bet)
+    {
+        switch (m_config_bet)
+        {
+            case 0:
+                LineBetPlus_Button.interactable = false;
+                LineBetMinus_Button.interactable = true;
+                break;
+            case 1:
+                LineBetPlus_Button.interactable = true;
+                LineBetMinus_Button.interactable = false;
+                break;
+            case 2:
+                LineBetMinus_Button.interactable = true;
+                LineBetPlus_Button.interactable = true;
+                break;
+        }
+    }
+
+    private void CheckBetButtons()
+    {
+        if(BetCounter >= SocketManager.initialData.Bets.Count - 1)
+        {
+            TurnBetButtons(1);
+        }
+        else if(BetCounter <= 0)
+        {
+            TurnBetButtons(0);
+        }
+        else
+        {
+            TurnBetButtons(2);
+        }
     }
 
     //start the icons animation
