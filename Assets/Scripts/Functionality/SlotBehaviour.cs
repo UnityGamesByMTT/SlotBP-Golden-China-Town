@@ -660,8 +660,8 @@ public class SlotBehaviour : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(0.5f);
-            IsSpinning = false;
+            yield return new WaitForSeconds(2f);
+            //IsSpinning = false;
         }
         if (SocketManager.resultData.freeSpins.isNewAdded)
         {
@@ -678,7 +678,7 @@ public class SlotBehaviour : MonoBehaviour
             if (IsAutoSpin)
             {
                 StopAutoSpin();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
