@@ -48,7 +48,8 @@ public class SlotBehaviour : MonoBehaviour
     private Button SlotStart_Button;
     [SerializeField]
     private Button AutoSpin_Button;
-    [SerializeField] private Button AutoSpinStop_Button;
+    [SerializeField]
+    private Button AutoSpinStop_Button;
     [SerializeField]
     private Button MaxBet_Button;
     [SerializeField]
@@ -661,7 +662,7 @@ public class SlotBehaviour : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(2f);
-            //IsSpinning = false;
+            IsSpinning = false;
         }
         if (SocketManager.resultData.freeSpins.isNewAdded)
         {
@@ -835,7 +836,7 @@ public class SlotBehaviour : MonoBehaviour
     {
         List<int> y_points = null;
         List<int> points_anim = null;
-        if (LineId.Count > 0)
+        if (LineId.Count > 0 && points_AnimString.Count > 0)
         {
             if (audioController) audioController.PlayWLAudio("win");
 

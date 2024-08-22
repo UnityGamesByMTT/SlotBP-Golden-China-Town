@@ -2838,7 +2838,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Jackpot: Mega win triggered by 5 Jackpot symbols on a pay line.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83bf3feb83db049d386f45a963741291, type: 2}
   m_sharedMaterial: {fileID: -3620856343399639059, guid: 83bf3feb83db049d386f45a963741291, type: 2}
@@ -4075,6 +4075,8 @@ MonoBehaviour:
   FreeSpin_Text: {fileID: 1402277324}
   Scatter_Text: {fileID: 484893724}
   Jackpot_Text: {fileID: 244040443}
+  Wild_Text: {fileID: 1972071137}
+  Bonus_Text: {fileID: 1766817959}
   SettingsPopup_Object: {fileID: 103253977}
   SettingsExit_Button: {fileID: 1398599432}
   Sound_Button: {fileID: 1690227056}
@@ -4453,8 +4455,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Scatter: Offers higher pay outs and awards 5 free spins if 5 symbols align
-    on the pay line with a multiplier.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83bf3feb83db049d386f45a963741291, type: 2}
   m_sharedMaterial: {fileID: -3620856343399639059, guid: 83bf3feb83db049d386f45a963741291, type: 2}
@@ -7173,7 +7174,7 @@ GameObject:
   - component: {fileID: 687656554}
   - component: {fileID: 687656556}
   m_Layer: 5
-  m_Name: AutoSpinStop_Button (1)
+  m_Name: AutoSpinStop_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13786,8 +13787,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Free Spin: Activates 20, 10, or 5 free spins when 3, 4, or 5 symbols appear
-    on pay lines.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83bf3feb83db049d386f45a963741291, type: 2}
   m_sharedMaterial: {fileID: -3620856343399639059, guid: 83bf3feb83db049d386f45a963741291, type: 2}
@@ -14459,8 +14459,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1237956802}
-  - {fileID: 271841705}
   - {fileID: 687656553}
+  - {fileID: 271841705}
   - {fileID: 567733205}
   - {fileID: 494110598}
   - {fileID: 119564726}
@@ -17673,8 +17673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bonus: Starts a spinning wheel game for a pay out when 4 or more symbols
-    appear anywhere on the result matrix.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83bf3feb83db049d386f45a963741291, type: 2}
   m_sharedMaterial: {fileID: -3620856343399639059, guid: 83bf3feb83db049d386f45a963741291, type: 2}
@@ -20494,8 +20493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wild: Substitutes for all symbols except Jackpot, Free Spin, Bonus, and
-    Scatter.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83bf3feb83db049d386f45a963741291, type: 2}
   m_sharedMaterial: {fileID: -3620856343399639059, guid: 83bf3feb83db049d386f45a963741291, type: 2}
