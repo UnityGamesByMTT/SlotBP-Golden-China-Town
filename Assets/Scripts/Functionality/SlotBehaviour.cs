@@ -48,7 +48,8 @@ public class SlotBehaviour : MonoBehaviour
     private Button SlotStart_Button;
     [SerializeField]
     private Button AutoSpin_Button;
-    [SerializeField] private Button AutoSpinStop_Button;
+    [SerializeField]
+    private Button AutoSpinStop_Button;
     [SerializeField]
     private Button MaxBet_Button;
     [SerializeField]
@@ -625,7 +626,7 @@ public class SlotBehaviour : MonoBehaviour
         {
             yield return StopTweening(5, Slot_Transform[i], i);
         }
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
         KillAllTweens();
 
@@ -653,14 +654,14 @@ public class SlotBehaviour : MonoBehaviour
         }
 
         yield return new WaitUntil(() => !CheckPopups);
-        if (!IsAutoSpin)
+        if (!IsAutoSpin && !IsFreeSpin)
         {
             ToggleButtonGrp(true);
             IsSpinning = false;
         }
         else
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(2f);
             IsSpinning = false;
         }
         if (SocketManager.resultData.freeSpins.isNewAdded)
@@ -678,7 +679,7 @@ public class SlotBehaviour : MonoBehaviour
             if (IsAutoSpin)
             {
                 StopAutoSpin();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
@@ -835,7 +836,7 @@ public class SlotBehaviour : MonoBehaviour
     {
         List<int> y_points = null;
         List<int> points_anim = null;
-        if (LineId.Count > 0)
+        if (LineId.Count > 0 && points_AnimString.Count > 0)
         {
             if (audioController) audioController.PlayWLAudio("win");
 
