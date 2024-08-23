@@ -79,6 +79,10 @@ public class UIManager : MonoBehaviour
     private TMP_Text Scatter_Text;
     [SerializeField]
     private TMP_Text Jackpot_Text;
+    [SerializeField]
+    private TMP_Text Wild_Text;
+    [SerializeField]
+    private TMP_Text Bonus_Text;
 
     [Header("Settings Popup")]
     [SerializeField]
@@ -422,15 +426,23 @@ public class UIManager : MonoBehaviour
         {
             if (paylines.symbols[i].Name.ToUpper() == "FREESPIN")
             {
-                if (FreeSpin_Text) FreeSpin_Text.text = "Free Spin: Activates " + paylines.symbols[i].Multiplier[0][1] + ", " + paylines.symbols[i].Multiplier[1][1] + ", or " + paylines.symbols[i].Multiplier[2][1] + " free spins when 3, 4, or 5 symbols appear on pay lines.";
+                if (FreeSpin_Text) FreeSpin_Text.text = paylines.symbols[i].description.ToString();
             }
             if (paylines.symbols[i].Name.ToUpper() == "SCATTER")
             {
-                if (Scatter_Text) Scatter_Text.text = "Scatter: Offers higher pay outs and awards " + paylines.symbols[i].Multiplier[0][1] + " free spins if 5 symbols align on the pay line with a multiplier.\nPayout: 5x - " + paylines.symbols[i].Multiplier[0][0] + ", 4x - " + paylines.symbols[i].Multiplier[1][0] + ", 3x - " + paylines.symbols[i].Multiplier[2][0];
+                if (Scatter_Text) Scatter_Text.text = paylines.symbols[i].description.ToString();
             }
             if (paylines.symbols[i].Name.ToUpper() == "JACKPOT")
             {
-                if (Jackpot_Text) Jackpot_Text.text = "Jackpot: Mega win triggered by 5 Jackpot symbols on a pay line.\nPayout: <color=blue>" + paylines.symbols[i].defaultAmount + "x";
+                if (Jackpot_Text) Jackpot_Text.text = paylines.symbols[i].description.ToString();
+            }
+            if(paylines.symbols[i].Name.ToUpper() == "WILD")
+            {
+                if (Wild_Text) Wild_Text.text = paylines.symbols[i].description.ToString();
+            }
+            if(paylines.symbols[i].Name.ToUpper() == "BONUS")
+            {
+                if (Bonus_Text) Bonus_Text.text = paylines.symbols[i].description.ToString();
             }
         }
     }
@@ -478,12 +490,12 @@ public class UIManager : MonoBehaviour
         //    LayoutRebuilder.ForceRebuildLayoutImmediate(About_RT);
         //});
 
-        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x, Paytable_RT.anchoredPosition.y - 125), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x, Paytable_RT.anchoredPosition.y - 150), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Paytable_RT);
         });
 
-        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x, Settings_RT.anchoredPosition.y - 250), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x, Settings_RT.anchoredPosition.y - 300), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_RT);
         });
