@@ -244,6 +244,7 @@ public class SlotBehaviour : MonoBehaviour
     {
         if (currentBalance < currentTotalBet)
         {
+            Debug.Log("Comparing Balance...");
             uiManager.LowBalPopup();
             if (AutoSpin_Button) AutoSpin_Button.interactable = false;
             if (SlotStart_Button) SlotStart_Button.interactable = false;
@@ -324,7 +325,8 @@ public class SlotBehaviour : MonoBehaviour
         if (LineBet_text) LineBet_text.text = SocketManager.initialData.Bets[BetCounter].ToString("f2");
         if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.Bets[BetCounter] * Lines).ToString("f2");
         currentTotalBet = SocketManager.initialData.Bets[BetCounter] * Lines;
-        CompareBalance();
+        if (currentTotalBet < currentBalance)
+            CompareBalance();
     }
 
 
@@ -554,8 +556,11 @@ public class SlotBehaviour : MonoBehaviour
     //manage the Routine for spinning of the slots
     private IEnumerator TweenRoutine()
     {
+        Debug.Log("Entered Tween Routine...");
+        Debug.Log("Current Balance is " + currentBalance.ToString());
         if (currentBalance < currentTotalBet && !IsFreeSpin)
         {
+            Debug.Log("Tween Routine Executing...");
             CompareBalance();
             StopAutoSpin();
             yield return new WaitForSeconds(1);
@@ -626,6 +631,7 @@ public class SlotBehaviour : MonoBehaviour
         CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
         KillAllTweens();
 
+        currentBalance = SocketManager.playerdata.Balance;
 
         CheckPopups = true;
 
