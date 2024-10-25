@@ -246,14 +246,14 @@ public class SlotBehaviour : MonoBehaviour
         {
             Debug.Log("Comparing Balance...");
             uiManager.LowBalPopup();
-            if (AutoSpin_Button) AutoSpin_Button.interactable = false;
-            if (SlotStart_Button) SlotStart_Button.interactable = false;
+            //if (AutoSpin_Button) AutoSpin_Button.interactable = false;
+            //if (SlotStart_Button) SlotStart_Button.interactable = false;
         }
-        else
-        {
-            if (AutoSpin_Button) AutoSpin_Button.interactable = true;
-            if (SlotStart_Button) SlotStart_Button.interactable = true;
-        }
+        //else
+        //{
+        //    if (AutoSpin_Button) AutoSpin_Button.interactable = true;
+        //    if (SlotStart_Button) SlotStart_Button.interactable = true;
+        //}
     }
 
     private IEnumerator FreeSpinCoroutine(int spinchances)
@@ -545,6 +545,7 @@ public class SlotBehaviour : MonoBehaviour
         WinningsAnim(false);
 
         if (SlotStart_Button) SlotStart_Button.interactable = false;
+
         if (TempList.Count > 0)
         {
             StopGameAnimation();
@@ -564,6 +565,7 @@ public class SlotBehaviour : MonoBehaviour
             CompareBalance();
             StopAutoSpin();
             yield return new WaitForSeconds(1);
+            ToggleButtonGrp(true);
             yield break;
         }
         if (audioController) audioController.PlayWLAudio("spin");
