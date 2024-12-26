@@ -222,6 +222,8 @@ public class SlotBehaviour : MonoBehaviour
 
             Turbo_Button.GetComponent<ImageAnimation>().StartAnimation();
 
+            //Turbo_Button.image.sprite = TurboToggleSprites[1];
+
             Turbo_Button.image.color = new Color(1, 1, 1, 1);
 
         }
