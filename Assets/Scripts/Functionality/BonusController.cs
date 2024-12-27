@@ -51,6 +51,21 @@ public class BonusController : MonoBehaviour
         if (Loose_Transform) Loose_Transform.gameObject.SetActive(false);
         if (_audioManager) _audioManager.SwitchBGSound(true);
         if (Spin_Button) Spin_Button.interactable = true;
+
+        //HACK: New Modification 23.12.2024
+        if (slotManager.IsAutoSpin)
+        {
+            if (Spin_Button) Spin_Button.interactable = false;
+            DOVirtual.DelayedCall(1f, () => {
+                if (Spin_Button) Spin_Button.interactable = true;
+                Spin_Button.onClick.Invoke();
+                if (Spin_Button) Spin_Button.interactable = false;
+            });
+        }
+        else
+        {
+            if (Spin_Button) Spin_Button.interactable = true;
+        }
         stopIndex = stop;
         if (Bonus_Object) Bonus_Object.SetActive(true);
     }
@@ -60,7 +75,7 @@ public class BonusController : MonoBehaviour
         isCollision = false;
         if (Spin_Button) Spin_Button.interactable = false;
         RotateWheel();
-        DOVirtual.DelayedCall(2f, () =>
+        DOVirtual.DelayedCall(1f, () =>
         {
             TurnCollider(stopIndex);
         });
