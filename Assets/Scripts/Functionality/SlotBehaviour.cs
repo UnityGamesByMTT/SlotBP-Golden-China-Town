@@ -153,7 +153,7 @@ public class SlotBehaviour : MonoBehaviour
     private bool StopSpinToggle;
     private float SpinDelay = 0.2f;
     private bool IsTurboOn;
-    private bool WasAutoSpinOn;
+    [SerializeField] private bool WasAutoSpinOn;
 
     internal bool IsAutoSpin = false;
     private bool IsFreeSpin = false;
@@ -273,7 +273,6 @@ public class SlotBehaviour : MonoBehaviour
         if (IsAutoSpin)
         {
             IsAutoSpin = false;
-            WasAutoSpinOn = false;
             if (AutoSpinStop_Button) AutoSpinStop_Button.gameObject.SetActive(false);
             if (AutoSpin_Button) AutoSpin_Button.gameObject.SetActive(true);
             StartCoroutine(StopAutoSpinCoroutine());
@@ -704,7 +703,7 @@ public class SlotBehaviour : MonoBehaviour
 
         if (IsTurboOn || IsFreeSpin)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
         else
         {
@@ -874,7 +873,7 @@ public class SlotBehaviour : MonoBehaviour
             if (TBetMinus_Button) TBetMinus_Button.interactable = toggle;
             if (TBetPlus_Button) TBetPlus_Button.interactable = toggle;
         //}
-        if (Turbo_Button) Turbo_Button.interactable = toggle;
+        //if (Turbo_Button) Turbo_Button.interactable = toggle;
 
     }
 
