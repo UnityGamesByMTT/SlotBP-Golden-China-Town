@@ -43,6 +43,7 @@ public class SocketIOManager : MonoBehaviour
     private string TestToken;
 
     protected string gameID = "SL-GCT";
+    //protected string gameID = "";
 
     internal bool isLoaded = false;
     internal bool SetInit = false;
