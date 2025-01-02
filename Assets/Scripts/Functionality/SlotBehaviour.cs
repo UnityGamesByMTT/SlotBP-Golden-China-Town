@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System.Linq;
 using TMPro;
 using System;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 public class SlotBehaviour : MonoBehaviour
 {
@@ -167,6 +169,8 @@ public class SlotBehaviour : MonoBehaviour
     [Header("BonusGame Popup")]
     [SerializeField]
     private BonusController _bonusManager;
+
+    private Tweener BalanceTween;
 
     private void Start()
     {
@@ -679,7 +683,7 @@ public class SlotBehaviour : MonoBehaviour
 
             balance = balance - bet;
 
-            DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
+            BalanceTween=DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
             {
                 if (Balance_text) Balance_text.text = initAmount.ToString("f3");
             });
@@ -746,7 +750,7 @@ public class SlotBehaviour : MonoBehaviour
         CheckPopups = true;
 
         if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString("f3");
-
+        BalanceTween?.Kill();
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f3");
 
         if (SocketManager.resultData.jackpot > 0)
