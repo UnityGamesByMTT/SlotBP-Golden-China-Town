@@ -3689,7 +3689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120.95}
+  m_AnchoredPosition: {x: 0, y: -130}
   m_SizeDelta: {x: 1550.23, y: 838.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324126881
@@ -4854,7 +4854,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  TestToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MzYxNjIyMDQsImV4cCI6MTczNjc2NzAwNH0.MMwN1CbOY57uTGfqQEVbm_VtottX5CXXU1fW8GXSOfQ
+  TestToken: 
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9809,7 +9809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 744, y: 390}
+  m_AnchoredPosition: {x: 744, y: 348}
   m_SizeDelta: {x: 92.7, y: 96.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &990849630
@@ -14737,7 +14737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -29.51001, y: 390.00024}
+  m_AnchoredPosition: {x: -29.51001, y: 365}
   m_SizeDelta: {x: 548, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479599610
@@ -17969,10 +17969,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1023456359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 69.16998}
-  m_SizeDelta: {x: 0, y: 138.34}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -75}
+  m_SizeDelta: {x: 2340, y: 138.33997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1716379682
 MonoBehaviour:
@@ -23697,7 +23697,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1547519657}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.23229213
+  m_Size: 0.23229215
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
