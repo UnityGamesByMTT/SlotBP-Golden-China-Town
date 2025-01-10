@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System.Linq;
 using TMPro;
 using System;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 public class SlotBehaviour : MonoBehaviour
 {
@@ -168,6 +170,8 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField]
     private BonusController _bonusManager;
 
+    private Tweener BalanceTween;
+
     private void Start()
     {
         IsAutoSpin = false;
@@ -183,17 +187,30 @@ public class SlotBehaviour : MonoBehaviour
         if (MaxBet_Button) MaxBet_Button.onClick.AddListener(MaxBet);
 
         if (StopSpin_Button) StopSpin_Button.onClick.RemoveAllListeners();
-        if (StopSpin_Button) StopSpin_Button.onClick.AddListener(() => { StopSpinToggle = true; StopSpin_Button.gameObject.SetActive(false); });
+        if (StopSpin_Button) StopSpin_Button.onClick.AddListener(() =>
+        {
+            audioController.PlayButtonAudio();
+            StopSpinToggle = true;
+            StopSpin_Button.gameObject.SetActive(false);
+        });
 
         if (Turbo_Button) Turbo_Button.onClick.RemoveAllListeners();
-        if (Turbo_Button) Turbo_Button.onClick.AddListener(TurboToggle);
+        if (Turbo_Button) Turbo_Button.onClick.AddListener(() =>
+        {
+            audioController.PlayButtonAudio();
+            TurboToggle();
+        });
 
         if (AutoSpin_Button) AutoSpin_Button.onClick.RemoveAllListeners();
         if (AutoSpin_Button) AutoSpin_Button.onClick.AddListener(AutoSpin);
 
 
         if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.RemoveAllListeners();
-        if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.AddListener(StopAutoSpin);
+        if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.AddListener(() =>
+        {
+            audioController.PlayButtonAudio();
+            StopAutoSpin();
+        });
 
         tweenHeight = (15 * IconSizeFactor) - 280;
         //CheckBetButtons();
@@ -679,7 +696,7 @@ public class SlotBehaviour : MonoBehaviour
 
             balance = balance - bet;
 
-            DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
+            BalanceTween=DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
             {
                 if (Balance_text) Balance_text.text = initAmount.ToString("f3");
             });
@@ -687,7 +704,7 @@ public class SlotBehaviour : MonoBehaviour
         SocketManager.AccumulateResult(BetCounter);
 
         yield return new WaitUntil(() => SocketManager.isResultdone);
-        yield return new WaitForSeconds(0.9f);
+        //yield return new WaitForSeconds(0.9f);
 
         for (int j = 0; j < SocketManager.resultData.ResultReel.Count; j++)
         {
@@ -707,7 +724,7 @@ public class SlotBehaviour : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 yield return new WaitForSeconds(0.1f);
                 if (StopSpinToggle)
@@ -746,7 +763,7 @@ public class SlotBehaviour : MonoBehaviour
         CheckPopups = true;
 
         if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString("f3");
-
+        BalanceTween?.Kill();
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f3");
 
         if (SocketManager.resultData.jackpot > 0)
@@ -1023,6 +1040,7 @@ public class SlotBehaviour : MonoBehaviour
     {
         alltweens[index].Pause();
         int tweenpos = (reqpos * IconSizeFactor) - IconSizeFactor;
+        slotTransform.localPosition = new Vector2(slotTransform.localPosition.x, 0);
         alltweens[index] = slotTransform.DOLocalMoveY(-tweenpos + 100, 0.5f).SetEase(Ease.OutElastic);
         //yield return new WaitForSeconds(0.2f);
         if (!isStop)
