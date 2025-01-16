@@ -51,11 +51,12 @@ public class BonusController : MonoBehaviour
         if (PopupPanel) PopupPanel.SetActive(false);
         if (Win_Transform) Win_Transform.gameObject.SetActive(false);
         if (Loose_Transform) Loose_Transform.gameObject.SetActive(false);
+        PopulateWheel(m_SocketManager.bonusdata);
         if (_audioManager) _audioManager.SwitchBGSound(true);
         if (Spin_Button) Spin_Button.interactable = true;
 
         //HACK: New Modification 23.12.2024
-        if (slotManager.IsAutoSpin)
+        if (slotManager.IsAutoSpin || slotManager.IsFreeSpin)
         {
             Spin_Button.gameObject.SetActive(false);
             DOVirtual.DelayedCall(1f, () => {
