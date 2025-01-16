@@ -158,11 +158,11 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField] private bool WasAutoSpinOn;
 
     internal bool IsAutoSpin = false;
-    private bool IsFreeSpin = false;
+    internal bool IsFreeSpin = false;
     private bool IsSpinning = false;
     internal bool CheckPopups = false;
     private bool CheckSpinAudio = false;
-    private int BetCounter = 0;
+    internal int BetCounter = 0;
     private double currentBalance = 0;
     private double currentTotalBet = 0;
 
