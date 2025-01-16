@@ -27,6 +27,8 @@ public class BonusController : MonoBehaviour
     private Transform Win_Transform;
     [SerializeField]
     private Transform Loose_Transform;
+    [SerializeField]
+    private SocketIOManager m_SocketManager;
 
     internal bool isCollision = false;
 
@@ -55,16 +57,14 @@ public class BonusController : MonoBehaviour
         //HACK: New Modification 23.12.2024
         if (slotManager.IsAutoSpin)
         {
-            if (Spin_Button) Spin_Button.interactable = false;
+            Spin_Button.gameObject.SetActive(false);
             DOVirtual.DelayedCall(1f, () => {
-                if (Spin_Button) Spin_Button.interactable = true;
-                Spin_Button.onClick.Invoke();
-                if (Spin_Button) Spin_Button.interactable = false;
+                Spinbutton();
             });
         }
         else
         {
-            if (Spin_Button) Spin_Button.interactable = true;
+            Spin_Button.gameObject.SetActive(true);
         }
         stopIndex = stop;
         if (Bonus_Object) Bonus_Object.SetActive(true);
@@ -91,7 +91,7 @@ public class BonusController : MonoBehaviour
             }
             else
             {
-                if (Bonus_Text[i]) Bonus_Text[i].text = bonusdata[i];
+                if (Bonus_Text[i]) Bonus_Text[i].text = (double.Parse(bonusdata[i]) * m_SocketManager.initialData.Bets[slotManager.BetCounter]).ToString();
             }
         }
     }
