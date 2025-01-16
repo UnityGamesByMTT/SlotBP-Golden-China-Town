@@ -162,7 +162,7 @@ public class SlotBehaviour : MonoBehaviour
     private bool IsSpinning = false;
     internal bool CheckPopups = false;
     private bool CheckSpinAudio = false;
-    private int BetCounter = 0;
+    internal int BetCounter = 0;
     private double currentBalance = 0;
     private double currentTotalBet = 0;
 
