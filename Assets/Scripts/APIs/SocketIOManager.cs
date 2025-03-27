@@ -272,9 +272,9 @@ public class SocketIOManager : MonoBehaviour
         string json = JsonUtility.ToJson(message);
         Debug.Log(json);
         // Send the message
-        if (this.manager.Socket != null && this.manager.Socket.IsOpen)
+        if (gameSocket != null && gameSocket.IsOpen)
         {
-            this.manager.Socket.Emit(eventName, json);
+            gameSocket.Emit(eventName, json);
             Debug.Log("JSON data sent: " + json);
         }
         else
@@ -299,22 +299,7 @@ public class SocketIOManager : MonoBehaviour
     {
         // Construct message data
 
-        ExitData message = new ExitData();
-        message.id = "EXIT";
-
-        // Serialize message data to JSON
-        string json = JsonUtility.ToJson(message);
-        Debug.Log(json);
-        // Send the message
-        if (this.manager.Socket != null && this.manager.Socket.IsOpen)
-        {
-            this.manager.Socket.Emit(eventName, json);
-            Debug.Log("JSON data sent: " + json);
-        }
-        else
-        {
-            Debug.LogWarning("Socket is not connected.");
-        }
+        SendDataWithNamespace("EXIT");
     }
 
     private void ParseResponse(string jsonObject)
