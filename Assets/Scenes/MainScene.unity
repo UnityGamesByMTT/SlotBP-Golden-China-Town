@@ -4855,7 +4855,7 @@ MonoBehaviour:
   bonusdata: []
   _jsManager: {fileID: 500036493}
   JSManager: {fileID: 1328365741}
-  TestToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OWEwZThiZWM1MWYwY2FmODRkNWFlZSIsInVzZXJuYW1lIjoibWVodWwtdGVzdCIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3NDA1NDMzMTcsImV4cCI6MTc0MTE0ODExN30.6O_HhQf007uMVZ9nph99abSZuhAqMC0h_CcQSi3xDH8
+  testToken: d4b15881599a45e79a0ff671a442973e
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23742,7 +23742,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1547519657}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.23229215
+  m_Size: 0.23229213
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
